@@ -25,7 +25,13 @@ class UserAdmin(BaseUserAdmin):
         ),
         (
             "Profile",
-            {"fields": ("fullname", "email", "student_class",)},
+            {
+                "fields": (
+                    "fullname",
+                    "email",
+                    "student_class",
+                )
+            },
         ),
         ("Others", {"fields": ("is_active", "is_staff", "is_superuser")}),
     )

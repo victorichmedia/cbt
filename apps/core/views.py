@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, View
-from django.contrib.auth import logout
+
 from apps.exam.models import Exam
 
 
@@ -44,5 +44,3 @@ class LoginView(View):
 
         messages.warning(request, "Invalid username or password")
         return redirect("login")
-
-

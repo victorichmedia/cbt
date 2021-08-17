@@ -1,6 +1,8 @@
+import datetime
+
+from django.contrib import admin
 from django.db import models
 from django.urls import reverse
-from django.contrib import admin
 
 from apps.core.models import StudentClass, User
 
@@ -16,7 +18,9 @@ class Exam(models.Model):
     student_class = models.ForeignKey(
         StudentClass, on_delete=models.SET_NULL, null=True
     )
-    duration = models.PositiveIntegerField(default=60)
+    duration = models.PositiveIntegerField(
+        default=60, help_text="Duration in minutes. 60 means 60 minutes/1 hour."
+    )
     is_published = models.BooleanField(default=False)
     status = models.IntegerField(choices=STATUS_CHOICES, default=STATUS_OPEN)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -25,12 +29,15 @@ class Exam(models.Model):
     def __str__(self):
         return self.title
 
-    @admin.display(description='Questions')
+    def get_absolute_url(self):
+        return reverse("exam-detail", kwargs={"pk": self.pk})
+
+    @admin.display(description="Questions")
     def question_count(self):
         return self.question_set.all().count()
 
-    def get_absolute_url(self):
-        return reverse("exam-detail", kwargs={"pk": self.pk})
+    def exam_duration(self):
+        return str(datetime.timedelta(minutes=self.duration))
 
 
 class Question(models.Model):
