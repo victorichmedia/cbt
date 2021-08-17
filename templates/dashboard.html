@@ -7,7 +7,7 @@
   </div>
   {% if exams %}
     <table class="table table-hover table-bordered mt-4 ">
-        <thead>
+        <thead class="table-light">
             <tr>
               <th scope="col">Exam Code</th>
               <th scope="col">Title</th>
@@ -17,11 +17,14 @@
           <tbody>
               {% for exam in exams %}
                 <tr>
-                  <th scope="row">{{ exam.code }}</th>
-                  <td>{{exam.title}}</td>
-                  <td>{{exam.duration}}</td>
+                  <th scope="row">
+                    <a href="{{ exam.get_absolute_url }}">{{ exam.code }} </a>
+                  </th>
+                  <td>
+                    <a href="{{ exam.get_absolute_url }}">{{exam.title}} </a>
+                  </td>
+                  <td>{{exam.exam_duration}}</td>
                 </tr>
-
               {% endfor %}
 
     </table>
