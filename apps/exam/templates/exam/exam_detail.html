@@ -31,7 +31,7 @@
 </div>
 <div class="row mt-2">
   <div class="card-action center mt-2 button2 offset-md-5 button2 offset-sm-5">
-    <a href="{{ question.get_absolute_url }}"> <button class="btn btn-primary" type="button"> <h4> Start Exam</h4> </button> </a>
+    <a href="{% url 'exam:take' exam.id %}"> <button class="btn btn-primary" type="button"> <h4> Start Exam</h4> </button> </a>
   </div>
 </div>
 {% endblock content %}
