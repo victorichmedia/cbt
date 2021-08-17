@@ -30,7 +30,7 @@ class Exam(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("exam-detail", kwargs={"pk": self.pk})
+        return reverse("exam:detail", kwargs={"pk": self.pk})
 
     @admin.display(description="Questions")
     def question_count(self):
