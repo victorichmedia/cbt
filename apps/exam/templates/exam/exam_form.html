@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="row">
+  <div class="col s12 m8 offset-m2">
+
+    <div class="center">
+      <h4>
+        {% if object %}
+        Update {{object}}
+        {% else %}
+        Create a new {{name}}
+        {% endif %}
+
+      </h4>
+    </div>
+
+    {% if form.errors %}
+    <div class="card-panel red white-text" style="margin-bottom: 2em;">Please
+      correct the errors below</div>
+
+    {% endif %}
+
+    <form method="POST">
+
+      {% csrf_token %}
+
+      {{ form.non_field_errors }}
+
+      {% for hidden in form.hidden_fields %}
+      { hidden }}
+      {% endfor %}
+      {% for field in form.visible_fields %}
+
+      {% if field|widget_type == 'clearablefileinput' %}
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>{{ field.label}}</span>
+          {{ field }}
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+
+      {% elif field|widget_type == 'textarea'%}
+      <div class="input-field">
+        {{ field.label_tag }}
+        {{ field | add_class:"materialize-textarea validate"}}
+        <span class="red-text helper-text">
+          {% for error in field.errors %}{{ error}}{% endfor %}
+        </span>
+      </div>
+
+      {% elif field|widget_type == 'select' %}
+      <div class="input-field">
+        {{ field | add_class:"validate" }}
+        {{ field.label_tag }}
+        <span class="red-text helper-text">
+          {% for error in field.errors %}{{ error}}{% endfor %}
+        </span>
+      </div>
+
+      {% elif field|widget_type == 'checkboxinput' %}
+      <div class="input-field">
+        <p>
+          <label>
+            {{ field}}
+            <span>{{ field.label_tag }}</span>
+          </label>
+        </p>
+      </div>
+
+      {% else %}
+      <div class="input-field">
+        {{ field.label_tag }}
+        {{ field | add_class:"validate"}}
+        <span class="red-text helper-text">
+          {% for error in field.errors %}{{ error}}{% endfor %}
+        </span>
+      </div>
+
+      {% endif %}
+      {% endfor %}
+
+
+
+      <div class="center">
+        <button type="submit" class="waves-effect waves-light btn-small">
+          {% if object %}
+          Update {{object}}
+          {% else %}
+          Create {{name}}
+          {% endif %}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load core_tags %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col s12">
+    <div class="center">
+      <h5>Online Exams (CBT)</h5>
+    </div>
+
+    {% if object_list %}
+      <div class="row">
+        {% for exam in object_list %}
+          <div class="col s12 m4">
+            <div class="card hoverable">
+              <div class="card-content">
+                <span class="card-title red-text">{{exam}}</span>
+                <p>Time alloted: {{exam.time_alloted|sectodur}} </p>
+              </div>
+              <div class="card-action">
+                <a href="{% url 'exam-detail' exam.id %}" class="btn">Details</a>
+                <a href="{% url 'scores' exam.id %}" class="btn">Results</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    {% else %}
+      <p>There are currently no exam to show.</p>
+    {% endif %}
+
+  </div>
+</div>
+
+{% if user.user_role == 'admin' %}
+<!-- Floating -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" href="{% url 'exam-create' %}">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
+{% endif %}
+{% endblock content %}
+
+
+
+{% block morejs %}
+
+{% endblock morejs %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load core_tags %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col s12">
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title row">
+          <div class="col s12 m8">{{exam}}</div>
+        </div>
+
+        <div class="section">
+            <h5>Well done!</h5>
+            <p>Exam submitted, marked and recorded.</p>
+            
+            <h5>Your score is {{score.score}}%</h5>
+
+            <a href="{% url 'score-detail' exam.id user.id %}">Click here to view result analysis.</a>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+

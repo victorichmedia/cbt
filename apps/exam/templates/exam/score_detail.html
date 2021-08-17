@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load cbt_tags %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col s12">
+    <div class="center">
+      <h5>Results Analysis for {{exam}}</h5>
+      Score: {{score.score}}%
+    </div>
+
+
+    {% for question in questions %}
+      <div class="section">
+
+        {{question.question|linebreaks}}
+
+        {% if question.audio %} 
+          <audio controls>
+            <source src="{{question.audio.url}}" type="audio/ogg">
+          </audio> 
+        {% endif %} 
+
+        {% if question.image %} 
+          <img src="{{question.image.url}}" alt="" width="100" height="100"> 
+        {% endif %}
+
+        <ul class="collection">
+
+          {% for option in question.questionchoice_set.all %}
+            <li class="collection-item {% if option.is_correct %}green white-text{% endif %}">
+              
+              {{option.body}}
+
+              {% if option.audio %} 
+                <audio controls>
+                  <source src="{{option.audio.url}}" type="audio/ogg">
+                </audio> 
+              {% endif %} 
+
+              {% if option.image %} 
+                <img src="{{option.image.url}}" alt="" width="100" height="100"> 
+              {% endif %}
+
+              <span class="secondary-content yellow-text"><i class="material-icons">{% get_user_choice option uid %}</i></span>
+            </li>
+          {% endfor %}
+
+        </ul>
+      </div>
+    {% endfor %}
+
+
+
+  </div>
+</div>
+
+{% endblock content %}

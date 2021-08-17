@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col s12">
+    <div class="center">
+      <h5>Results for {{exam}}</h5>
+    </div>
+
+    <div class="section">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date Started</th>
+            <th>Date Completed</th>
+            <th>Has completed</th>
+            <th>score</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for score in object_list %}
+          <tr>
+            <td>{{ score.candidate}}</td>
+            <td>{{ score.start_time}}</td>
+            <td>{{ score.end_time}}</td>
+            <td>{{ score.has_completed}}</td>
+            <td>{{ score.score}}%</td>
+            <td>
+              <a href="{% url 'score-detail' exam.id score.candidate.id %}"><i
+                  class="material-icons">remove_red_eye</i></a>
+
+            </td>
+          </tr>
+
+          {% empty %}
+            <tr>
+              <td>No submission for this exam yet.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+{% endblock content %}
