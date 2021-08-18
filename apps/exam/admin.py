@@ -43,7 +43,7 @@ class ExamAdmin(nested_admin.NestedModelAdmin):
     list_display = (
         "title",
         "question_count",
-        "duration",
+        "exam_duration",
         "student_class",
         "created_by",
         "created_on",

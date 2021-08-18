@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'custom/css/style.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendors/swiper/css/swiper-bundle.min.css' %}" rel="stylesheet">
+    <link href="{% static 'custom/css/style.css' %}" rel="stylesheet">
 
     <title>{{sitename}}</title>
   </head>
@@ -64,8 +65,11 @@
     
     
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/swiper/js/swiper-bundle.min.js' %}"></script>
+
     {% block scripts %} {% endblock %}
+    
 
   </body>
 </html>

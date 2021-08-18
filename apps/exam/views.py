@@ -1,4 +1,6 @@
-from datetime import timedelta, timezone
+from datetime import timedelta
+
+from django.utils import timezone
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
@@ -78,3 +80,12 @@ class ExamCompleteView(LoginRequiredMixin, View):
             "score": score,
         }
         return render(request, "exam/complete.html", context)
+
+
+class ScoreDetailView(LoginRequiredMixin, View):
+  def get(self, request, *args, **kwargs):
+        score = Score.objects.get(exam=kwargs["pk"], candidate=request.user)
+        context = {
+            "score": score,
+        }
+        return render(request, "exam/score_detail.html", context)

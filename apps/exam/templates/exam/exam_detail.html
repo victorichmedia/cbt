@@ -15,7 +15,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title  text-dark  text-center p-2 rounded">DURATION</h5>
-        <p class="card-text text-center">{{exam.duration}}</p>
+        <p class="card-text text-center">{{exam.exam_duration}}</p>
       </div>
     </div>
   </div>
@@ -30,8 +30,9 @@
   </div>
 </div>
 <div class="row mt-2">
-  <div class="card-action center mt-2 button2 offset-md-5 button2 offset-sm-5">
-    <a href="{% url 'exam:take' exam.id %}"> <button class="btn btn-primary" type="button"> <h4> Start Exam</h4> </button> </a>
+  <div class="text-center">
+    <a href="{% url 'exam:take' exam.id %}"> <button class="btn btn-primary" type="button"> <h4> Start Exam</h4> </button> </a><br>
+    <small>Time starts immediately after clicking this button!</small> 
   </div>
 </div>
 {% endblock content %}

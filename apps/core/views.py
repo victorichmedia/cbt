@@ -1,10 +1,11 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import OuterRef, Subquery
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView, View
+from django.views.generic import View
 
-from apps.exam.models import Exam
+from apps.exam.models import Exam, Score
 
 
 class DashboardView(LoginRequiredMixin, View):
@@ -13,7 +14,12 @@ class DashboardView(LoginRequiredMixin, View):
         if user.is_superuser or user.is_staff:
             return redirect("/admin/")
         else:
-            exams = Exam.objects.filter(student_class=user.student_class)
+            scores = Score.objects.filter(
+                has_completed=True, exam=OuterRef("pk"), candidate=user
+            ).values("score")
+            exams = Exam.objects.filter(student_class=user.student_class).annotate(
+                student_score=Subquery(scores[:1])
+            )
             context = {"exams": exams}
             return render(request, "dashboard.html", context)
 

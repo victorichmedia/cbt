@@ -1,0 +1,4 @@
+input:checked {
+  background-color: green;
+  color: yellow;
+}

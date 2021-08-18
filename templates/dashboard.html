@@ -9,9 +9,10 @@
     <table class="table table-hover table-bordered mt-4 ">
         <thead class="table-light">
             <tr>
-              <th scope="col">Exam Code</th>
-              <th scope="col">Title</th>
-              <th scope="col">Duration</th>
+              <th >Exam Code</th>
+              <th>Title</th>
+              <th>Duration</th>
+              <th>Score</th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +25,7 @@
                     <a href="{{ exam.get_absolute_url }}">{{exam.title}} </a>
                   </td>
                   <td>{{exam.exam_duration}}</td>
+                  <td>{{exam.student_score}}</td>
                 </tr>
               {% endfor %}
 

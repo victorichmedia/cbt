@@ -43,8 +43,8 @@ class Exam(models.Model):
 class Question(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
     body = models.TextField()
-    audio = models.FileField(upload_to="cbt/questions/audio/", null=True, blank=True)
-    image = models.ImageField(upload_to="cbt/questions/images/", null=True, blank=True)
+    audio = models.FileField(upload_to="exam/questions/audio/", null=True, blank=True)
+    image = models.ImageField(upload_to="exam/questions/images/", null=True, blank=True)
 
     def __str__(self):
         return self.body[:20]
@@ -53,8 +53,8 @@ class Question(models.Model):
 class QuestionChoice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     body = models.TextField(blank=True)
-    audio = models.FileField(upload_to="cbt/choices/audio/", null=True, blank=True)
-    image = models.ImageField(upload_to="cbt/choices/images/", null=True, blank=True)
+    audio = models.FileField(upload_to="exam/choices/audio/", null=True, blank=True)
+    image = models.ImageField(upload_to="exam/choices/images/", null=True, blank=True)
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
